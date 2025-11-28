@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --primary-background: #eee;
+  --primary-text: #111;
+  --secondary-text: #eeeeee;
+}
+
+@font-face {
+  font-family: Personal-font-500;
+  src: url(../public/fonts/Lausanne-300.woff2);
+}
+@font-face {
+  font-family: Personal-font-300;
+  src: url(../public/fonts/Lausanne-500.woff2);
+}
+
+::selection {
+  background-color: #6edb1a;
+  color: #eee;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
