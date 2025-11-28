@@ -31,7 +31,12 @@ const Agency = () => {
         start: "top 27.8%",
         end: "top -110%",
         pin: true,
+        pinSpacing: true,
+        pinReparent: true,
+        pinType: 'transform',
         scrub: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (e) => {
           let imgIndex;
           if (e.progress < 1) {
@@ -47,10 +52,7 @@ const Agency = () => {
 
   return (
     <div>
-      <div className="section-1">
-        <h1 className="fixed overflow-hidden text-5xl font-[personal-font-500] top-5 left-5">
-          Harsh
-        </h1>
+      <div className="section-1 relative py-1">
         <div
           ref={imageDivRef}
           className="absolute h-[45vh] w-[20vw] rounded top-44 left-[30vw]"
