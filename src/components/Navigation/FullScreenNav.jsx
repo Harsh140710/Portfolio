@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useContext } from "react";
 import { useRef } from "react";
 import { NavBarContext } from "../../context/NavContext";
+import { Link } from "react-router-dom";
 
 const FullScreenNav = () => {
   const navLinks = [
@@ -15,8 +16,8 @@ const FullScreenNav = () => {
     },
     {
       name: "Agency",
-      description_1: "Know us",
-      description_2: "Know us",
+      description_1: "Know about me",
+      description_2: "Know about me",
       image_1: "image-1.jpg",
       image_2: "image-2.jpg",
     },
@@ -95,11 +96,14 @@ const FullScreenNav = () => {
   useGSAP(
     function () {
       if (navOpen) {
+        document.body.classList.add("overflow-hidden");
         gsapAnimation();
       } else {
+        document.body.classList.remove("overflow-hidden");
         gsapAnimationReverse();
       }
-    },[navOpen]
+    },
+    [navOpen]
   );
 
   return (
@@ -107,76 +111,109 @@ const FullScreenNav = () => {
       <div
         ref={fullScreenRef}
         id="fullScreenNav"
-        className="fullScreenNav hidden h-screen w-full z-50 overflow-hidden absolute text-white"
+        className="
+    fullScreenNav hidden h-screen w-full
+    z-50 overflow-hidden absolute text-white
+  "
       >
         <div className="h-screen w-full fixed">
           <div className="h-full w-full flex">
-            <div className="stairing h-full w-1/5 bg-black "></div>
-            <div className="stairing h-full w-1/5 bg-black "></div>
-            <div className="stairing h-full w-1/5 bg-black "></div>
-            <div className="stairing h-full w-1/5 bg-black "></div>
-            <div className="stairing h-full w-1/5 bg-black "></div>
+            <div className="stairing h-full w-1/5 bg-black max-md:w-1/3"></div>
+            <div className="stairing h-full w-1/5 bg-black max-md:w-1/3"></div>
+            <div className="stairing h-full w-1/5 bg-black max-md:w-1/3"></div>
+            <div className="stairing h-full w-1/5 bg-black max-md:hidden"></div>
+            <div className="stairing h-full w-1/5 bg-black max-md:hidden"></div>
           </div>
         </div>
-        <div ref={fullNavLinkRef} className="relative">
-          <div className="navLink flex items-center w-full justify-between">
-            <div className="-mt-16 ml-3.5">
-              <h1 className="text-6xl font-bold text-white">Harsh</h1>
-            </div>
+
+        <div ref={fullNavLinkRef} className="relative w-full h-full">
+          <div
+            className="
+        navLink flex items-center justify-between
+        w-full px-6 pt-6
+        max-md:px-4 max-md:pt-4
+      "
+          >
+            <h1 className="text-6xl max-lg:text-5xl max-md:text-4xl font-bold">
+              Harsh
+            </h1>
+
             <div
               onClick={() => setNavOpen(false)}
-              className="relative h-32 w-32 cursor-pointer"
+              className="relative cursor-pointer h-32 w-32 max-md:h-16 max-md:w-16"
             >
-              <div className="absolute h-46 w-0.5 -rotate-45 origin-top bg-[#eee]"></div>
-              <div className="absolute h-46 w-0.5 right-0 rotate-45 origin-top bg-[#eee]"></div>
+              <div className="absolute h-full w-[3px] -rotate-45 bg-white left-1/2 -translate-x-1/2"></div>
+              <div className="absolute h-full w-[3px] rotate-45 bg-white left-1/2 -translate-x-1/2"></div>
             </div>
           </div>
-          <div id="allLinks" className="">
+
+          <div
+            id="allLinks"
+            className="
+        w-full h-[calc(100vh-120px)]
+        max-md:h-[calc(100vh-80px)]
+        flex flex-col
+        justify-center
+      "
+          >
             {navLinks.map((e, index) => (
-              <div
-                className={`link relative ${
-                  index === navLinks.length - 1 ? "border-y" : "border-t"
-                } border-white`}
+              <Link
+              to={`/${e.name.toLowerCase()}`}
                 key={index}
+                className={`
+            link relative w-full
+            ${index === navLinks.length - 1 ? "border-y" : "border-t"}
+            border-white
+          `}
               >
-                <h1 className="font-semibold text-[5vw] uppercase text-center">
+                <h1
+                  className="
+              font-semibold uppercase text-center
+              text-[5vw] max-lg:text-[6vw] max-md:text-[9vw]
+            "
+                >
                   {e.name}
                 </h1>
-                <div className="moveLink absolute text-black bg-[#6edb1a] top-0 flex">
+
+                <div className="moveLink absolute top-0 flex overflow-hidden bg-[#6edb1a] text-black">
                   <div className="moveX flex flex-nowrap items-center">
-                    <h2 className="whitespace-nowrap font-semibold text-[5vw] uppercase text-center">
+                    <h2 className="whitespace-nowrap font-semibold text-[5vw] max-md:text-[9vw] uppercase">
                       {e.description_1}
                     </h2>
+
                     <img
                       src={e.image_1}
-                      className="h-14 w-36 shrink-0 object-center rounded-full"
+                      className="h-14 w-36 shrink-0 object-cover rounded-full"
                     />
-                    <h2 className="whitespace-nowrap font-semibold text-[5vw] uppercase text-center">
+
+                    <h2 className="whitespace-nowrap font-semibold text-[5vw] max-md:text-[9vw] uppercase">
                       {e.description_2}
                     </h2>
+
                     <img
                       src={e.image_2}
-                      className="h-14 w-36 shrink-0 object-center rounded-full"
+                      className="h-14 w-36 shrink-0 object-cover rounded-full"
                     />
                   </div>
+
                   <div className="moveX flex flex-nowrap items-center">
-                    <h2 className="whitespace-nowrap font-semibold text-[5vw] uppercase text-center">
+                    <h2 className="whitespace-nowrap font-semibold text-[5vw] max-md:text-[9vw] uppercase">
                       {e.description_1}
                     </h2>
                     <img
                       src={e.image_1}
-                      className="h-14 w-36 shrink-0 object-center rounded-full"
+                      className="h-14 w-36 shrink-0 object-cover rounded-full"
                     />
-                    <h2 className="whitespace-nowrap font-semibold text-[5vw] uppercase text-center">
+                    <h2 className="whitespace-nowrap font-semibold text-[5vw] max-md:text-[9vw] uppercase">
                       {e.description_2}
                     </h2>
                     <img
                       src={e.image_2}
-                      className="h-14 w-36 shrink-0 object-center rounded-full"
+                      className="h-14 w-36 shrink-0 object-cover rounded-full"
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

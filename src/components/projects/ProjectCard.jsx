@@ -14,25 +14,40 @@ const ProjectCard = () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  useGSAP(function () {
+  useGSAP(() => {
     gsap.from(".hero", {
-      height: '150px',
+      height: "250px",
       scrollTrigger: {
         trigger: ".card",
         start: "top 100%",
-        end: "top -120%",
+        end: "top -50%",
         scrub: true,
       },
     });
   });
 
   return (
-    <div className="hero w-full grid grid-cols-1 lg:grid-cols-2 h-[900px] gap-2 mb-5">
-      {projects.map((e) => (
-        <div className=" card relative group w-full cursor-pointer hover:rounded-3xl transition-all hover:scale-102 overflow-hidden h-full">
-          <img src={e.image} className="object-fill h-full w-full" />
-          <div className="opacity-0 transition-all group-hover:opacity-100 absolute h-full w-full flex items-center justify-center top-0 left-0 bg-black/50">
-            <h2 className="text-white uppercase border rounded-full font-semibold text-4xl px-5 py-2">
+    <div
+      className="hero w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-2 auto-rows-[230px] sm:auto-rows-[300px] md:auto-rows-[380px] lg:h-[920px] mb-5
+      "
+    >
+      {projects.map((e, index) => (
+        <div
+          key={index}
+          className="card relative group w-full cursor-pointer overflow-hidden h-full hover:rounded-3xl transition-all hover:scale-102
+          "
+        >
+          {/* FIX: Perfect scaling on mobile/tablet */}
+          <img src={e.image} className="object-cover h-full w-full" />
+
+          <div
+            className="opacity-0 transition-all duration-300 group-hover:opacity-100 absolute h-full w-full flex items-center justify-center top-0 left-0 bg-black/50
+            "
+          >
+            <h2
+              className="text-white uppercase border rounded-full font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl px-4 md:px-5 py-2
+              "
+            >
               {e.title}
             </h2>
           </div>
